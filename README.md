@@ -23,7 +23,7 @@ Run the following commands. Please note this installs node into $HOME/local - if
 
 Edit the 'srcDir' variable at the top of autotest.js
 
-Paste the following code before the '</head>' tag in ScriptRunner.html
+Paste the following code before the `</head>` tag in ScriptRunner.html
 
     <!-- Growl notifier. Served from a CDN to minimise hassle -->
     <script src="http://cdn.socket.io/stable/socket.io.js"></script>         
@@ -78,6 +78,4 @@ Paste the following code before the '</head>' tag in ScriptRunner.html
  
 ## How to use
 
-Run the autotest script
- 
     ./autotest.sh
