@@ -13,11 +13,13 @@ This script will notify SpecRunner.html to re-run the test suite if it detects a
 
 ## Installation
 
-Install growl and growlnotify from http://growl.info/ - growlnotify is in the 'Extras' folder of the Growl dmg
+Install growl and growlnotify from http://growl.info/ - growlnotify is in the 'Extras' folder of the Growl dmg.
 
-Install node.js and 'node packet manager', aka npm. The script below will install them both to $HOME/local
+Run the following commands. Please note this installs node into $HOME/local - if you already have node installed please see install.sh for manual installation
 
-    ./install.sh
+- git clone git@github.com:nick/GrowlNotify.git
+- cd GrowlNotify
+- ./install.sh
 
 Edit the 'srcDir' variable at the top of autotest.js
 
