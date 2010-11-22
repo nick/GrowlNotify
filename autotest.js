@@ -23,29 +23,41 @@ var socket = io.listen(server, { log: null });
 socket.on('connection', function(client){
   client.on('message', function(msg){ 
       var running = msg.match(/RUNNING/),
-          errors = msg.match(/ERRORS: ([0-9]+)/);
-      if(running) {
-          if(playSounds) exec('afplay run.mp3');
+          errors = msg.match(/ERRORS: ([0-9]+)/).
+          msg, img;
+         
+      if (running) {
+          if (playSounds) {
+              exec('afplay run.mp3');
+          }
       } else if(errors) {
-          if(errors[1] != "0") { 
-              if(playSounds) exec('afplay fail.mp3');
-              var msg = errors[1] + ' failures';
-                  img = "fail.png";
+          if (errors[1] != "0") { 
+              if (playSounds) {
+                  exec('afplay fail.mp3');
+              }
+              
+              msg = errors[1] + ' failures';
+              img = "fail.png";
+                  
           } else {
-              var msg = "All tests pass";
-                  img = "pass.png";
+              msg = "All tests pass";
+              img = "pass.png";
           }
           exec('growlnotify -n SenchaTest --image=' + img + ' -m "' + msg + '" Sencha Autotest');
       }
-  })
+  });
 });
 
 child = exec('find ' + srcDir + ' | grep \.js', 
     function (err, stdout, stderr) {
-        if(err || stderr) { sys.puts(err || stderr); process.exit(); }
+        if (err || stderr) {
+            sys.puts(err || stderr); process.exit();
+        }
+        
         var files = stdout.split("\n");
-        sys.puts("Monitoring " + files.length + " .js files in " + srcDir)
-        for(var i=0; i< files.length; i++) {
+        sys.puts("Monitoring " + files.length + " .js files in " + srcDir);
+        
+        for (var i=0; i< files.length; i++) {
             (function(path) {                    
                 fs.watchFile(path, {persistent: true, interval: 200}, function (curr, prev) {
                     if(String(curr.mtime) != String(prev.mtime)) {
@@ -54,6 +66,6 @@ child = exec('find ' + srcDir + ' | grep \.js',
                     }
                 });
             })(files[i]);
-        }            
+        }
     }
 );
