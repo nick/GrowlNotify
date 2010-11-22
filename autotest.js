@@ -1,5 +1,5 @@
 // Change this to the path of your source files
-var srcDir = "/Users/nick/Projects/sencha/Mobile/src/platform/src";
+var srcDir = "~/Projects/sencha/Mobile/src/platform/src";
 var playSounds = true;
 var port = 3001; // Socket.IO listener port
 
@@ -18,7 +18,7 @@ var server = http.createServer(function(req, res){
 });
 
 server.listen(port);
-var socket = io.listen(server);
+var socket = io.listen(server, { log: null });
 
 socket.on('connection', function(client){
   client.on('message', function(msg){ 
@@ -44,6 +44,7 @@ child = exec('find ' + srcDir + ' | grep \.js',
     function (err, stdout, stderr) {
         if(err || stderr) { sys.puts(err || stderr); process.exit(); }
         var files = stdout.split("\n");
+        sys.puts("Monitoring " + files.length + " .js files in " + srcDir)
         for(var i=0; i< files.length; i++) {
             (function(path) {                    
                 fs.watchFile(path, {persistent: true, interval: 200}, function (curr, prev) {
