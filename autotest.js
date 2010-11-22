@@ -23,7 +23,7 @@ var socket = io.listen(server, { log: null });
 socket.on('connection', function(client){
   client.on('message', function(msg){ 
       var running = msg.match(/RUNNING/),
-          errors = msg.match(/ERRORS: ([0-9]+)/).
+          errors = msg.match(/ERRORS: ([0-9]+)/),
           msg, img;
          
       if (running) {
