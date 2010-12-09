@@ -55,15 +55,7 @@ Paste the following code before the `</head>` tag in ScriptRunner.html
                 }, 5000)
             });
             socket.connect();
-
-            // Extra globals introduced by socket.io to ignore
-            SenchaReporter.prototype.allowedGlobals = SenchaReporter.prototype.allowedGlobals.concat([
-                'io',
-                'WEB_SOCKET_SWF_LOCATION',
-                'Transport',
-                'JSONPPolling',
-                'ASProxy'
-            ]);
+            
             SenchaReporter.prototype._renderResults = SenchaReporter.prototype.renderResults;
             SenchaReporter.prototype.renderResults = function(runner) {
                 this._renderResults(runner);
